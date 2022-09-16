@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>RFID Records</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">RFID Records</h1>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center">There are no RFID on File. Enter one below.</h4>
+    {% else %}
+    
+    <table border="5" style="margin-left:auto;margin-right:auto;">
+        <tr>
+            <th><b>Name</b></th>
+            <th><b>RFID</b></th>
+            <th><b>Added</b></th>
+            <th><b>Actions</b></th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.name }}</td>
+                <td>{{ task.content }}</td>
+                <td>{{ task.date_created.date() }}</td>
+                <td>
+                    <a href="/delete/{{task.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{task.id}}">Update</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    {% endif %}
+
+    <div class="form">
+        <br>
+        <form style="text-align:center" action="/users" method="POST">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+            <label for="content">RFID</label>
+            <input type="text" name="content" id="content">
+            <input type="submit" value="ADD RFID">
+        </form>
+        <br>
+        <form style="text-align:center" action="/">
+            <input type="submit" value="RETURN TO MAIN PAGE">
+        </form>
+    </div>
+
+</div>
+{% endblock %}

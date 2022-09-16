@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>RFID Records</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align:center">RFID Records</h1>
+    <div class="form">
+        <br>
+        <form style="text-align:center" action="/">
+            <input type="submit" value="RETURN TO MAIN PAGE">
+        </form>
+    </div>
+    {% if ldata|length < 1 %}
+    <h4 style="text-align:center">There are no RFID Scanned</h4>
+    {% else %}
+
+    <table border="5" style="margin-left:auto;margin-right:auto;">
+        <tr>
+            <th><b>NAME</b></th>
+            <th><b>RFID</b></th>
+            <th><b>TIMESTAMP</b></th>
+            <th><b>RESULT</b></th>
+        </tr>
+        {% for log in ldata %}
+            <tr>
+                <td>{{ log.name_new }}</td>
+                <td>{{ log.rfid_new }}</td>
+                <td>{{ log.date_new }}</td>
+                <td>{{ log.result_new }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    
+</div>
+{% endblock %}
