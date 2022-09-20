@@ -39,7 +39,7 @@ def index():
 
         try:
             db.session.add(new_RFID)
-            db.session_commit()
+            db.session.commit()
             return redirect('/users')
         except:
             return 'There was an issue adding your data'
@@ -96,6 +96,7 @@ def update(id):
 
     if request.method == 'POST':
         task.content = request.form['content']
+        task.name = request.form['name']
 
         try:
             db.session.commit()
